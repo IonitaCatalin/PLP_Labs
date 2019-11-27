@@ -78,7 +78,39 @@ Fixpoint plus (n1 n2 : natural) : natural :=
     | S m => S (plus m n2)
   end.
 
+
+
+Fixpoint equalNaturals(n1 n2 : natural):bool:=
+match n1 with
+| O => match n2 with 
+       | O =>true
+       | _ =>false
+       end
+
+| S x => match n2 with
+          | O => false
+          | S y => equalNaturals x y
+          end
+
+end.
+
 Eval compute in (plus O (S O)).
 Eval compute in (plus (S O) (S O)).
+Eval compute in ( equalNaturals  O (S O)).
+Eval compute in (equalNaturals O O).
+Eval compute in (equalNaturals (S (S O)) (S (S O))).
+
+
+Lemma a1_equal_a2:
+  forall a1 a2,a1=a2 ->equalNaturals (S a1) (S a2)=true.
+Proof.
+    -induction a1.
+      simpl.
+      intros a2.
+      * induction a2.
+        trivial.
+        
+   
+    
 
 
